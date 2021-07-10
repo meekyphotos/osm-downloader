@@ -1,4 +1,4 @@
-module deploy-cli
+module github.com/meekyphotos/osm-downloader
 
 go 1.16
 

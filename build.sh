@@ -1,4 +1,3 @@
-
 if [ "$GOOS" = "windows" ]; then
   go build -o osm.exe cmd/cli/main.go
 else
