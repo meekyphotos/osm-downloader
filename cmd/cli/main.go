@@ -15,7 +15,7 @@ func main() {
 	}
 
 	app := &cli.App{
-		Name:        "geofabrik",
+		Name:        "osm",
 		Description: "Download extract CLI",
 		Flags: []cli.Flag{
 			&cli.StringFlag{Name: "path", Value: ".", Usage: "Specify path"},
