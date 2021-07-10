@@ -19,10 +19,10 @@ jobs:
         go-version: 1.16
 
     - name: Build Windows
-      run: env GOOS=windows GOARCH=amd64 go build -o geofabrik.exe -v ./...
+      run: env GOOS=windows GOARCH=amd64 go build -o geofabrik.exe -v ./cmd/cli/main.go
 
     - name: Build Linux x64
-      run: env GOOS=linux GOARCH=amd64 go build -o geofabrik.exe -v ./...
+      run: env GOOS=linux GOARCH=amd64 go build -o geofabrik.exe -v ./cmd/cli/main.go
 
     - name: Test
       run: go test -v ./...
