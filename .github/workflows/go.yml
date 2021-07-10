@@ -2,6 +2,8 @@ name: Go
 
 on:
   push:
+    tags:
+      - 'v*.*.*'
     branches: [ main ]
   pull_request:
     branches: [ main ]
@@ -22,7 +24,16 @@ jobs:
       run: env GOOS=windows GOARCH=amd64 go build -o geofabrik.exe -v ./cmd/cli/main.go
 
     - name: Build Linux x64
-      run: env GOOS=linux GOARCH=amd64 go build -o geofabrik.exe -v ./cmd/cli/main.go
+      run: env GOOS=linux GOARCH=amd64 go build -o geofabrik -v ./cmd/cli/main.go
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files:
+          geofabrik.exe
+          geofabrik
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Test
       run: go test -v ./...
