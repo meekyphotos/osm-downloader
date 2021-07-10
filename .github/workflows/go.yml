@@ -2,17 +2,27 @@ name: Go
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    branches: [ main ]
 
 jobs:
-  release-linux-amd64:
-    name: release linux/amd64
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: wangyoucao577/go-release-action@v1.18
+      - name: Set up Go
+        uses: actions/setup-go@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          goos: linux
-          goarch: amd64
+          go-version: 1.16
+
+      - name: Build Windows
+        run: env GOOS=windows GOARCH=amd64 go build -o osm.exe -v cmd/cli/main.go
+
+      - name: Build Linux x64
+        run: env GOOS=linux GOARCH=amd64 go build -o osm cmd/cli/main.go
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: osm.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
