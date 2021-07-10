@@ -1,0 +1,28 @@
+name: Go
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.16
+
+    - name: Build Windows
+      run: env GOOS=windows GOARCH=amd64 go build -o geofabrik.exe -v ./...
+
+    - name: Build Linux x64
+      run: env GOOS=linux GOARCH=amd64 go build -o geofabrik.exe -v ./...
+
+    - name: Test
+      run: go test -v ./...
