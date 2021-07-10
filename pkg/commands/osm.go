@@ -1,12 +1,12 @@
 package commands
 
 import (
-	"deploy-cli/pkg/core"
 	_ "embed"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/jedib0t/go-pretty/v6/table"
+	"github.com/meekyphotos/osm-downloader/pkg/core"
 	"github.com/urfave/cli/v2"
 	"strings"
 )

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"deploy-cli/pkg/commands"
+	"github.com/meekyphotos/osm-downloader/pkg/commands"
 	"github.com/urfave/cli/v2"
 	"log"
 	"os"
